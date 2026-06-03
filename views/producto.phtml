@@ -1,8 +1,6 @@
-<!-- Vista: Detalle de Producto -->
+﻿<!-- Vista: Detalle de Producto -->
 <main class="py-10">
 <div class="container mx-auto px-4 max-w-5xl">
-
-    <!-- Breadcrumb -->
     <nav class="text-sm text-gray-500 mb-8">
         <a href="<?= BASE_URL ?>/index.php" class="hover:text-black">Inicio</a>
         <span class="mx-2">›</span>
@@ -10,40 +8,58 @@
         <span class="mx-2">›</span>
         <span class="text-black font-medium"><?= htmlspecialchars($producto['nombre']) ?></span>
     </nav>
-
     <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-
-        <!-- Imagen -->
         <div class="bg-gray-100 rounded-2xl overflow-hidden aspect-square">
-            <img src="<?= imgUrl($producto['imagen']) ?>"
-                 alt="<?= htmlspecialchars($producto['nombre']) ?>"
-                 class="w-full h-full object-cover"
-                 onerror="this.onerror=null;this.src='<?= BASE_URL ?>/assets/img/placeholder.svg'">
+            <img src="<?= imgUrl($producto['imagen']) ?>" alt="<?= htmlspecialchars($producto['nombre']) ?>" class="w-full h-full object-cover" onerror="this.onerror=null;this.src='<?= BASE_URL ?>/assets/img/placeholder.svg'">
         </div>
-
-        <!-- Info -->
         <div class="flex flex-col justify-center">
             <span class="text-sm text-gray-500 uppercase tracking-widest mb-2"><?= htmlspecialchars($producto['categoria']) ?></span>
             <h1 class="text-3xl font-bold text-black mb-4"><?= htmlspecialchars($producto['nombre']) ?></h1>
             <p class="text-4xl font-bold text-black mb-4"><?= formatCOP($producto['precio']) ?></p>
-            <p class="text-sm text-gray-500 mb-8">Stock disponible: <span class="font-semibold text-black"><?= $producto['stock'] ?> unidades</span></p>
-
+            <p class="text-sm text-gray-500 mb-6">Stock disponible: <span class="font-semibold text-black"><?= $producto['stock'] ?> unidades</span></p>
+            <?php if (!empty($producto['tallas'])): ?>
+            <div class="mb-6">
+                <p class="text-sm font-semibold text-black mb-2">Selecciona tu talla:</p>
+                <div class="flex flex-wrap gap-2" id="tallas-container">
+                    <?php foreach (explode(',', $producto['tallas']) as $talla): ?>
+                    <button onclick="seleccionarTalla(this, '<?= trim($talla) ?>')" class="talla-btn px-4 py-2 border-2 border-gray-300 rounded-lg text-sm font-semibold hover:border-black transition-colors">
+                        <?= trim($talla) ?>
+                    </button>
+                    <?php endforeach; ?>
+                </div>
+                <p id="talla-error" class="text-red-500 text-xs mt-2 hidden">Por favor selecciona una talla</p>
+            </div>
+            <?php endif; ?>
             <?php if ($producto['stock'] > 0): ?>
-            <button onclick="addToCart(<?= $producto['id'] ?>, '<?= addslashes($producto['nombre']) ?>', <?= $producto['precio'] ?>, '<?= $producto['imagen'] ?>', '<?= $producto['categoria'] ?>', <?= $producto['stock'] ?>)"
-                    class="w-full bg-black text-white py-4 rounded-xl text-lg font-semibold hover:bg-gray-800 transition-colors mb-4">
+            <button onclick="agregarConTalla(<?= $producto['id'] ?>, '<?= addslashes($producto['nombre']) ?>', <?= $producto['precio'] ?>, '<?= $producto['imagen'] ?>', '<?= $producto['categoria'] ?>', <?= $producto['stock'] ?>, <?= !empty($producto['tallas']) ? 'true' : 'false' ?>)" class="w-full bg-black text-white py-4 rounded-xl text-lg font-semibold hover:bg-gray-800 transition-colors mb-4">
                 Añadir al Carrito
             </button>
             <?php else: ?>
-            <button disabled class="w-full bg-gray-300 text-gray-500 py-4 rounded-xl text-lg font-semibold cursor-not-allowed mb-4">
-                Agotado
-            </button>
+            <button disabled class="w-full bg-gray-300 text-gray-500 py-4 rounded-xl text-lg font-semibold cursor-not-allowed mb-4">Agotado</button>
             <?php endif; ?>
-
-            <a href="<?= BASE_URL ?>/pages/productos.php"
-               class="text-center text-sm text-gray-500 hover:text-black transition-colors">
-                ← Volver al catálogo
-            </a>
+            <a href="<?= BASE_URL ?>/pages/productos.php" class="text-center text-sm text-gray-500 hover:text-black transition-colors">← Volver al catálogo</a>
         </div>
     </div>
 </div>
 </main>
+<script>
+let tallaSeleccionada = null;
+function seleccionarTalla(btn, talla) {
+    document.querySelectorAll('.talla-btn').forEach(b => {
+        b.classList.remove('bg-black', 'text-white', 'border-black');
+        b.classList.add('border-gray-300');
+    });
+    btn.classList.add('bg-black', 'text-white', 'border-black');
+    btn.classList.remove('border-gray-300');
+    tallaSeleccionada = talla;
+    document.getElementById('talla-error')?.classList.add('hidden');
+}
+function agregarConTalla(id, nombre, precio, imagen, categoria, stock, tieneTallas) {
+    if (tieneTallas && !tallaSeleccionada) {
+        document.getElementById('talla-error')?.classList.remove('hidden');
+        return;
+    }
+    const nombreConTalla = tieneTallas ? nombre + ' (Talla: ' + tallaSeleccionada + ')' : nombre;
+    addToCart(id, nombreConTalla, precio, imagen, categoria, stock);
+}
+</script>
