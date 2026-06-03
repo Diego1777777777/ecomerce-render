@@ -29,7 +29,7 @@ require_once $configPath;
         const IMG_URL  = "<?= IMG_URL ?>";
     </script>
 </head>
-<body class="bg-white">
+<body class="bg-white" data-logged="<?= !empty($_SESSION['user_logged_in']) ? 'true' : 'false' ?>">
 
 <header class="border-b border-gray-200 sticky top-0 bg-white z-50">
     <div class="container mx-auto px-4">

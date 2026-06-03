@@ -1,8 +1,3 @@
-// =====================================================
-// FutbolShop — app.js  (JavaScript Global)
-// BASE_URL e IMG_URL son inyectados por header.php
-// =====================================================
-
 function formatCOP(price) {
     return '$' + price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ' COP';
 }
