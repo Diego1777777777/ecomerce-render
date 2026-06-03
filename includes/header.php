@@ -13,10 +13,13 @@ require_once $configPath;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Futbol Shop</title>
+    <meta name="description" content="Futbol Shop - La mejor tienda de equipamiento deportivo. Botines, camisetas, balones y más.">
+    <meta name="keywords" content="futbol, botines, camisetas, balones, tienda deportiva, equipamiento futbol">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://ecommerce-render.onrender.com">
     <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/style.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        // Inyectar BASE_URL para que app.js lo use
         const BASE_URL = "<?= BASE_URL ?>";
         const IMG_URL  = "<?= IMG_URL ?>";
     </script>
