@@ -17,6 +17,10 @@ require_once $configPath;
     <meta name="keywords" content="futbol, botines, camisetas, balones, tienda deportiva, equipamiento futbol">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://ecommerce-render.onrender.com">
+    <link rel="icon" type="image/x-icon" href="<?= BASE_URL ?>/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="<?= BASE_URL ?>/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="<?= BASE_URL ?>/favicon-16x16.png">
+    <link rel="apple-touch-icon" href="<?= BASE_URL ?>/apple-touch-icon.png">
     <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/style.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
