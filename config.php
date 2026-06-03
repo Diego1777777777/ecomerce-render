@@ -4,10 +4,10 @@
 // =====================================================
 
 // ── Credenciales de base de datos ──────────────────
-define('DB_HOST', 'localhost');
-define('DB_NAME', 'futbolshop');
-define('DB_USER', 'root');       // Cambia si usas otro usuario
-define('DB_PASS', '');           // Cambia si tienes contraseña
+define('DB_HOST', 'sql5.freesqldatabase.com');
+define('DB_NAME', 'sql5829215');
+define('DB_USER', 'sql5829215');
+define('DB_PASS', '12ag8pylah');
 define('DB_PORT', '3306');
 
 // ── Conexión PDO (singleton) ────────────────────────
