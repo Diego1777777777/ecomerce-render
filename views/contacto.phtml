@@ -1,0 +1,125 @@
+<!-- Vista: Contacto -->
+<main class="py-12">
+    <div class="container mx-auto px-4 max-w-6xl">
+
+        <div class="mb-10">
+            <h1 class="text-4xl font-bold text-black">Contacto</h1>
+            <p class="text-gray-600 mt-2">Estamos aquí para ayudarte. Escríbenos y te responderemos pronto.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+
+            <!-- Formulario -->
+            <div class="lg:col-span-2">
+                <div class="bg-white rounded-2xl shadow-sm p-8">
+
+                    <?php if ($mensajeEnviado): ?>
+                    <div class="bg-green-50 border border-green-200 text-green-700 px-4 py-4 rounded-lg mb-6 flex items-center gap-3">
+                        <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <p class="font-medium">¡Mensaje enviado exitosamente! Te contactaremos pronto.</p>
+                    </div>
+                    <?php endif; ?>
+
+                    <?php if ($error): ?>
+                    <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6">
+                        <p class="text-sm font-medium"><?= $error ?></p>
+                    </div>
+                    <?php endif; ?>
+
+                    <form method="POST" action="" class="space-y-5">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            <div>
+                                <label class="block text-sm font-semibold text-black mb-2">Nombre *</label>
+                                <input type="text" name="nombre" value="<?= isset($nombre) ? htmlspecialchars($nombre) : '' ?>"
+                                       required placeholder="Tu nombre"
+                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-black transition-colors">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-black mb-2">Correo Electrónico *</label>
+                                <input type="email" name="email" value="<?= isset($email) ? htmlspecialchars($email) : '' ?>"
+                                       required placeholder="tu@email.com"
+                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-black transition-colors">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-black mb-2">Asunto</label>
+                            <select name="asunto" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-black transition-colors bg-white">
+                                <option value="">Selecciona un asunto</option>
+                                <option value="pedido"   <?= isset($asunto) && $asunto === 'pedido'   ? 'selected' : '' ?>>Consulta sobre pedido</option>
+                                <option value="producto" <?= isset($asunto) && $asunto === 'producto' ? 'selected' : '' ?>>Información de producto</option>
+                                <option value="envio"    <?= isset($asunto) && $asunto === 'envio'    ? 'selected' : '' ?>>Envíos y devoluciones</option>
+                                <option value="otro"     <?= isset($asunto) && $asunto === 'otro'     ? 'selected' : '' ?>>Otro</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-black mb-2">Mensaje *</label>
+                            <textarea name="mensaje" rows="5" required placeholder="Escribe tu mensaje aquí..."
+                                      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-black transition-colors resize-none"><?= isset($mensaje) ? htmlspecialchars($mensaje) : '' ?></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-black text-white py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors">
+                            Enviar Mensaje
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Info de contacto -->
+            <div class="space-y-6">
+                <div class="bg-white rounded-2xl shadow-sm p-6">
+                    <h3 class="text-lg font-bold text-black mb-4">Información de Contacto</h3>
+                    <div class="space-y-4 text-sm text-gray-600">
+                        <div class="flex items-start gap-3">
+                            <svg class="w-5 h-5 text-black mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                            <span>Cali, Valle del Cauca, Colombia</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <svg class="w-5 h-5 text-black mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                            </svg>
+                            <span>contacto@futbolshop.com</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <svg class="w-5 h-5 text-black mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                            </svg>
+                            <span>+57 (2) 123-4567</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-sm p-6" id="envios">
+                    <h3 class="text-lg font-bold text-black mb-4">Horario de Atención</h3>
+                    <div class="space-y-2 text-sm text-gray-600">
+                        <div class="flex justify-between"><span>Lunes - Viernes</span><span class="font-medium text-black">8:00 - 18:00</span></div>
+                        <div class="flex justify-between"><span>Sábados</span><span class="font-medium text-black">9:00 - 14:00</span></div>
+                        <div class="flex justify-between"><span>Domingos</span><span class="font-medium text-gray-400">Cerrado</span></div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-sm p-6" id="faq">
+                    <h3 class="text-lg font-bold text-black mb-4">Preguntas Frecuentes</h3>
+                    <div class="space-y-3 text-sm text-gray-600">
+                        <div>
+                            <p class="font-semibold text-black">¿Cuánto demora el envío?</p>
+                            <p>Envíos en Colombia: 3-5 días hábiles.</p>
+                        </div>
+                        <div id="devoluciones">
+                            <p class="font-semibold text-black">¿Puedo devolver un producto?</p>
+                            <p>Sí, tienes 30 días desde la compra.</p>
+                        </div>
+                        <div>
+                            <p class="font-semibold text-black">¿Tienen garantía los productos?</p>
+                            <p>Todos los productos tienen garantía del fabricante.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</main>

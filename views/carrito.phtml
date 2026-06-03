@@ -1,0 +1,39 @@
+<!-- Vista: Carrito de Compras -->
+<main class="container mx-auto px-4 py-8">
+    <div class="mb-8">
+        <h1 class="text-4xl font-bold text-black mb-2">Carrito de Compras</h1>
+        <a href="<?= BASE_URL ?>/index.php" class="text-sm text-gray-600 hover:text-black transition-colors">← Continuar comprando</a>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div class="lg:col-span-2">
+            <div id="cartItems" class="space-y-4"></div>
+            <div id="emptyCart" class="hidden bg-white rounded-lg p-12 text-center">
+                <p class="text-6xl mb-4">🛒</p>
+                <h2 class="text-2xl font-bold text-black mb-2">Tu carrito está vacío</h2>
+                <p class="text-gray-600 mb-6">Añade productos para comenzar tu compra</p>
+                <a href="<?= BASE_URL ?>/pages/productos.php"
+                   class="inline-block bg-black text-white px-8 py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors">
+                    Explorar Productos
+                </a>
+            </div>
+        </div>
+
+        <div class="lg:col-span-1">
+            <div id="orderSummary" class="hidden bg-white rounded-lg p-6 sticky top-24 shadow-sm">
+                <h2 class="text-xl font-bold text-black mb-6">Resumen del Pedido</h2>
+                <div class="space-y-3 mb-6">
+                    <div class="flex justify-between text-gray-600"><span>Subtotal</span><span id="subtotal">$0 COP</span></div>
+                    <div class="flex justify-between text-gray-600"><span>Envío</span><span id="shipping">$0 COP</span></div>
+                    <div class="border-t border-gray-200 pt-3 flex justify-between text-lg font-bold text-black">
+                        <span>Total</span><span id="total">$0 COP</span>
+                    </div>
+                </div>
+                <button id="checkoutButton" class="w-full bg-black text-white py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors mb-3">
+                    Proceder al Pago
+                </button>
+                <p class="text-center text-xs text-gray-500">Envío gratis en pedidos superiores a $200.000 COP</p>
+            </div>
+        </div>
+    </div>
+</main>

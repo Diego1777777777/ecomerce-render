@@ -1,0 +1,90 @@
+<!-- Vista: Inicio -->
+
+<!-- Hero -->
+<section class="bg-black text-white py-20">
+    <div class="container mx-auto px-4">
+        <div class="max-w-3xl">
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                EQUIPAMIENTO<br>PROFESIONAL
+            </h1>
+            <p class="text-xl text-gray-300 mb-8 leading-relaxed">
+                Descubre la mejor selección de productos deportivos para llevar tu juego al siguiente nivel.
+            </p>
+            <a href="<?= BASE_URL ?>/pages/productos.php"
+               class="inline-block bg-white text-black px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                Explorar Catálogo
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Categorías -->
+<section class="py-12 bg-gray-50">
+    <div class="container mx-auto px-4">
+        <h2 class="text-2xl font-bold text-black mb-6 text-center">Explorar por Categoría</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <?php
+            $cats = [''=>'Todos','calzado'=>'👟 Calzado','ropa'=>'👕 Ropa','accesorios'=>'🎒 Accesorios'];
+            foreach ($cats as $slug => $label):
+                $url = BASE_URL . '/pages/productos.php' . ($slug ? "?categoria=$slug" : '');
+            ?>
+            <a href="<?= $url ?>"
+               class="bg-white border-2 border-gray-200 hover:border-black hover:bg-black hover:text-white px-6 py-3 rounded-lg font-semibold transition-all text-center">
+                <?= $label ?>
+            </a>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>
+
+<!-- Productos Destacados -->
+<section class="py-16">
+    <div class="container mx-auto px-4">
+        <div class="flex items-center justify-between mb-8">
+            <h2 class="text-3xl font-bold text-black">Productos Destacados</h2>
+            <a href="<?= BASE_URL ?>/pages/productos.php"
+               class="text-sm font-medium text-black hover:text-red-600 transition-colors">Ver todos →</a>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <?php foreach ($destacados as $p):
+                $imgSrc = imgUrl($p['imagen']);
+            ?>
+            <div class="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow">
+                <a href="<?= BASE_URL ?>/pages/productos.php?id=<?= $p['id'] ?>">
+                    <div class="aspect-square bg-gray-100 overflow-hidden">
+                        <img src="<?= $imgSrc ?>"
+                             alt="<?= htmlspecialchars($p['nombre']) ?>"
+                             class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                             onerror="this.onerror=null;this.src='<?= BASE_URL ?>/assets/img/placeholder.svg'">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-black mb-1 line-clamp-2"><?= htmlspecialchars($p['nombre']) ?></h3>
+                        <p class="text-sm text-gray-500 capitalize mb-2"><?= $p['categoria'] ?></p>
+                        <span class="text-xl font-bold text-black"><?= formatCOP($p['precio']) ?></span>
+                        <p class="text-xs text-gray-400 mt-1">Stock: <?= $p['stock'] ?> unidades</p>
+                    </div>
+                </a>
+                <div class="px-4 pb-4">
+                    <button onclick="addToCart(<?= $p['id'] ?>, '<?= addslashes($p['nombre']) ?>', <?= $p['precio'] ?>, '<?= $p['imagen'] ?>', '<?= $p['categoria'] ?>', <?= $p['stock'] ?>)"
+                            class="w-full bg-black text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-gray-800 transition-colors">
+                        Añadir al Carrito
+                    </button>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>
+
+<!-- Banner CTA -->
+<section class="bg-black text-white py-16">
+    <div class="container mx-auto px-4 text-center">
+        <h2 class="text-3xl font-bold mb-4">¿Necesitas ayuda?</h2>
+        <p class="text-gray-300 mb-8 text-lg">Nuestro equipo está listo para atenderte</p>
+        <a href="<?= BASE_URL ?>/pages/contacto.php"
+           class="inline-block bg-white text-black px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+            Contáctanos
+        </a>
+    </div>
+</section>
