@@ -1,39 +1,186 @@
 /* =====================================================
-   FutbolShop - style.css
+   FutbolShop - style.css — Estilo Deportivo Premium
    ===================================================== */
 
-/* Variables */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap');
+
 :root {
-    --color-black: #000000;
-    --color-white: #ffffff;
-    --color-red:   #dc2626;
-    --color-gray:  #6b7280;
-    --color-light: #f9fafb;
-    --font-main:   'Inter', system-ui, -apple-system, sans-serif;
-    --transition:  all 0.2s ease-in-out;
-    --radius:      0.5rem;
+    --color-red:     #e11d24;
+    --color-red-dark:#b91c1c;
+    --color-blue:    #1d3fae;
+    --color-blue-dark:#1e3a8a;
+    --color-black:   #0a0a0a;
+    --color-white:   #ffffff;
+    --color-gray:    #6b7280;
+    --color-light:   #f1f5f9;
+    --font-main:     'Inter', system-ui, sans-serif;
+    --font-display:  'Bebas Neue', sans-serif;
+    --transition:    all 0.25s ease-in-out;
+    --radius:        0.5rem;
+    --shadow:        0 4px 20px rgba(0,0,0,0.12);
 }
 
-/* Reset y base */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
 html { scroll-behavior: smooth; }
 
 body {
     font-family: var(--font-main);
     color: var(--color-black);
-    background-color: var(--color-white);
+    background-color: #f8fafc;
     line-height: 1.6;
 }
 
 img { max-width: 100%; height: auto; display: block; }
-
 a { text-decoration: none; color: inherit; }
 
-/* Utilidades */
+/* ── Header deportivo ── */
+header {
+    background: var(--color-black) !important;
+    border-bottom: 3px solid var(--color-red) !important;
+}
+
+header a, header span {
+    color: var(--color-white) !important;
+}
+
+header .logo-text {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    letter-spacing: 2px;
+    color: var(--color-white) !important;
+}
+
+header input {
+    background: #1a1a1a !important;
+    border-color: #333 !important;
+    color: white !important;
+}
+
+header input::placeholder { color: #888 !important; }
+
+header input:focus {
+    border-color: var(--color-red) !important;
+    box-shadow: 0 0 0 2px rgba(225,29,36,0.3) !important;
+}
+
+header svg { color: #aaa !important; }
+
+/* Cart badge */
+#cartCount {
+    background: var(--color-red) !important;
+}
+
+/* ── Navegación links ── */
+header a:hover {
+    color: var(--color-red) !important;
+}
+
+/* ── Hero section ── */
+.hero-section {
+    background: linear-gradient(135deg, var(--color-black) 0%, #1a1a2e 50%, var(--color-blue-dark) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(225,29,36,0.15) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.hero-section::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    left: -5%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(29,63,174,0.2) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+/* ── Tarjetas de producto ── */
+.product-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: transform 0.25s, box-shadow 0.25s;
+    border: 2px solid transparent;
+}
+
+.product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+    border-color: var(--color-red);
+}
+
+/* ── Botones ── */
+.btn-primary {
+    background: linear-gradient(135deg, var(--color-red), var(--color-red-dark));
+    color: white;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    border: none;
+    transition: var(--transition);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, var(--color-red-dark), #991b1b);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(225,29,36,0.4);
+}
+
+/* Botones negros de Tailwind → estilo rojo */
+.bg-black {
+    background-color: var(--color-red) !important;
+}
+.bg-black:hover, .hover\:bg-gray-800:hover {
+    background-color: var(--color-red-dark) !important;
+}
+
+/* Bordes negros activos → azul */
+.border-black {
+    border-color: var(--color-blue) !important;
+}
+
+/* ── Filtros de categoría ── */
+.bg-black.text-white.border-black {
+    background: linear-gradient(135deg, var(--color-red), var(--color-blue)) !important;
+    border-color: transparent !important;
+}
+
+/* ── Footer ── */
+footer {
+    background: linear-gradient(180deg, #0a0a0a 0%, #111827 100%) !important;
+    border-top: 3px solid var(--color-red);
+}
+
+/* ── Formularios ── */
+input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: var(--color-red) !important;
+    box-shadow: 0 0 0 2px rgba(225,29,36,0.15);
+}
+
+/* ── Badges y etiquetas ── */
+.badge-red {
+    background: var(--color-red);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+/* ── Utilidades ── */
 .container { width: 100%; max-width: 1280px; margin: 0 auto; }
 
-/* Line clamp para títulos */
 .line-clamp-2 {
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -41,57 +188,28 @@ a { text-decoration: none; color: inherit; }
     overflow: hidden;
 }
 
-/* Aspect ratio cuadrado para imágenes de producto */
-.aspect-square {
-    position: relative;
-    padding-bottom: 100%;
-}
-.aspect-square > * {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-}
+.aspect-square { position: relative; padding-bottom: 100%; }
+.aspect-square > * { position: absolute; inset: 0; width: 100%; height: 100%; }
 
-/* Sticky top */
 .sticky { position: sticky; }
 .top-0  { top: 0; }
-.top-24 { top: 6rem; }
+.z-50   { z-index: 50; }
 
-/* Z-index */
-.z-50 { z-index: 50; }
-
-/* Transiciones suaves en hover */
-.transition-all      { transition: var(--transition); }
-.transition-colors   { transition: color 0.2s, background-color 0.2s, border-color 0.2s; }
-.transition-shadow   { transition: box-shadow 0.2s; }
+.transition-all       { transition: var(--transition); }
+.transition-colors    { transition: color 0.2s, background-color 0.2s, border-color 0.2s; }
+.transition-shadow    { transition: box-shadow 0.2s; }
 .transition-transform { transition: transform 0.3s; }
-
 .hover\:scale-105:hover { transform: scale(1.05); }
 
-/* Toast global */
-#fs-toast {
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
+#fs-toast { transition: opacity 0.3s ease, transform 0.3s ease; }
 
-/* Scrollbar estilizada (webkit) */
 ::-webkit-scrollbar       { width: 6px; }
 ::-webkit-scrollbar-track { background: #f1f1f1; }
-::-webkit-scrollbar-thumb { background: #888; border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: #555; }
+::-webkit-scrollbar-thumb { background: var(--color-red); border-radius: 3px; }
 
-/* Formularios */
-input:focus, textarea:focus, select:focus {
-    outline: none;
-    border-color: var(--color-black) !important;
-    box-shadow: 0 0 0 2px rgba(0,0,0,0.08);
-}
-
-/* Botones */
 button { cursor: pointer; }
 button:disabled { opacity: 0.5; cursor: not-allowed; }
 
-/* Responsive helper */
 @media (max-width: 768px) {
     .container { padding: 0 1rem; }
 }
