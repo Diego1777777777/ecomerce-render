@@ -1,19 +1,20 @@
 <?php
-// pages/producto.php — Detalle de un producto
+// pages/productos.php — Controlador del catálogo de productos
 require_once '../config.php';
 if (session_status() === PHP_SESSION_NONE) session_start();
- 
-$id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
-$producto = getProductoPorId($id);
- 
-if (!$producto) {
-    header('Location: productos.php');
-    exit;
-}
- 
-$pageTitle = htmlspecialchars($producto['nombre']);
- 
-require_once '../includes/header.php';
-include '../views/producto.phtml';
-require_once '../includes/footer.php';
 
+$pageTitle = 'Catálogo de Productos';
+$todos     = getProductos();
+$catFiltro = isset($_GET['categoria']) ? htmlspecialchars($_GET['categoria']) : '';
+$busqueda  = isset($_GET['buscar'])    ? strtolower(trim(htmlspecialchars($_GET['buscar']))) : '';
+
+$filtrados = array_filter($todos, function($p) use ($catFiltro, $busqueda) {
+    $okCat = (!$catFiltro || $p['categoria'] === $catFiltro);
+    $okBus = (!$busqueda  || strpos(strtolower($p['nombre']), $busqueda) !== false
+                          || strpos($p['categoria'], $busqueda) !== false);
+    return $okCat && $okBus;
+});
+
+require_once '../includes/header.php';
+include '../views/productos.phtml';
+require_once '../includes/footer.php';
