@@ -3,7 +3,7 @@
 require_once 'config.php';
 if (session_status() === PHP_SESSION_NONE) session_start();
 
-$pageTitle  = 'Inicio';
+$pageTitle = 'Futbol Shop | Tienda de Ropa y Artículos Deportivos';
 $productos  = getProductos();
 $destacados = array_slice($productos, 0, 8);
 
