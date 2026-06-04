@@ -5,11 +5,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap');
 
 :root {
-    --color-red:     #dba10ddf;
-    --color-red-dark: #dba10ddf;
-    --color-blue:    #1d3fae;
-    --color-blue-dark:#1e3a8a;
-    --color-bluep:   #051b59;
+    --color-red:     #051b59;
+    --color-red-dark: #051b59;
+    --color-blue:    #dba10ddf;
+    --color-blue-dark: #dba10ddf;
+    --color-bluep:   #dba10ddf;
     --color-white:   #ffffff;
     --color-gray:    #6b7280;
     --color-light:   #f1f5f9;
