@@ -15,7 +15,7 @@ require_once $configPath;
     <meta name="description" content="Futbol Shop - La mejor tienda de equipamiento deportivo. Botines, camisetas, balones y más.">
     <meta name="keywords" content="futbol, botines, camisetas, balones, tienda deportiva, equipamiento futbol">
     <meta name="robots" content="index, follow">
-    <meta name="google-site-verification" content="CnpGfPNm9LRbZPzCOaT8MPsMB03zWKyY7O5G4IkbPEo" />
+    <meta name="google-site-verification" content="XullFlJZSqIeuFD4mZAfFVYs_2V9pjuviGfEWvC3oF8" />
     <link rel="canonical" href="https://ecommerce-render.onrender.com">
     <link rel="icon" type="image/x-icon" href="<?= BASE_URL ?>/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="<?= BASE_URL ?>/favicon-32x32.png">
