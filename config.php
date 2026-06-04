@@ -34,7 +34,9 @@ function getDB(): PDO {
 }
 
 // ── URL base (auto-detectada) ───────────────────────
-$protocol   = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') 
+            || (!empty($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https')
+            ? 'https' : 'http';
 $host       = $_SERVER['HTTP_HOST'] ?? 'localhost';
 $docRoot    = rtrim($_SERVER['DOCUMENT_ROOT'] ?? '', '/');
 $projectDir = dirname(__FILE__);
