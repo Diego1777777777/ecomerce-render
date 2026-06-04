@@ -1,3 +1,7 @@
+// =====================================================
+// FutbolShop — app.js
+// =====================================================
+
 function formatCOP(price) {
     return '$' + price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ' COP';
 }
@@ -11,11 +15,9 @@ function saveCart(cart) {
     localStorage.setItem('futbolshop_cart', JSON.stringify(cart));
 }
 
-// Agregar al carrito — imagen es solo el nombre del archivo
 function addToCart(id, nombre, precio, imagen, categoria, stock) {
     const cart = getCart();
     const existing = cart.find(i => i.id === id);
-
     if (existing) {
         if (existing.quantity < stock) {
             existing.quantity++;
@@ -26,10 +28,20 @@ function addToCart(id, nombre, precio, imagen, categoria, stock) {
     } else {
         cart.push({ id, nombre, precio, imagen, categoria, stock, quantity: 1 });
     }
-
     saveCart(cart);
     updateCartCount();
     showToast(`${nombre} añadido al carrito ✓`, 'success');
+
+    const userLoggedIn = document.body.dataset.logged === 'true';
+    if (userLoggedIn) {
+        const enPages = window.location.pathname.includes('/pages/');
+        const url = (enPages ? '' : 'pages/') + 'carrito_guardar.php';
+        fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ accion: 'agregar', producto_id: id, cantidad: 1, precio: precio })
+        });
+    }
 }
 
 function updateCartCount() {
@@ -50,10 +62,17 @@ function showToast(msg, type = 'success') {
     setTimeout(() => { t.style.opacity = '0'; t.style.transform = 'translateY(1rem)'; setTimeout(() => t.remove(), 300); }, 2800);
 }
 
+function buscar() {
+    const el = document.getElementById('searchInput') || document.getElementById('searchInputMobile');
+    if (!el) return;
+    const q = encodeURIComponent(el.value.trim());
+    if (!q) return;
+    window.location.href = BASE_URL + '/pages/productos.php?buscar=' + q;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     updateCartCount();
 
-    // Búsqueda — Enter en barra de header
     ['searchInput', 'searchInputMobile'].forEach(id => {
         const el = document.getElementById(id);
         if (!el) return;
@@ -61,8 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (e.key !== 'Enter') return;
             const q = encodeURIComponent(el.value.trim());
             if (!q) return;
-            const enPages = window.location.pathname.includes('/pages/');
-            window.location.href = (enPages ? '' : 'pages/') + 'productos.php?buscar=' + q;
+            window.location.href = BASE_URL + '/pages/productos.php?buscar=' + q;
         });
     });
 });
